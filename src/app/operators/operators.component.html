@@ -1,0 +1,40 @@
+<h2>The most common operators for angular app</h2>
+<app-block title="filter">
+  <p>
+    Filter is a simple operator, but on another hand it's really powerful.
+    It's really helpful in case if you merge couple of observables and you wanna get the result which only contains the real data
+    and all undesired publishes are ignored.
+    It's useful when you subscribe to store and you don't need to get an initial value only real data. It can be filtered out by loaded status.
+  </p>
+  {{filter$ | async}}
+</app-block>
+<app-block title="map">
+  <p>
+    It's a pretty common operator. Usually used for mapping data from couple Observables to one useful object.
+    Widely used in ngrx/effects to map data to actions;
+  </p>
+  {{map$ | async}}
+</app-block>
+<app-block title="merge">
+  <p>
+    Everyone knows about this operator, but the truth is it's not really useful. It merges all observables to one.
+    It only could be useful in case if you no need to know which observable triggers last publish, but the only data is important.
+  </p>
+  {{merge$ | async}}
+</app-block>
+<app-block title="combineLatest">
+  <p>
+    It's a super powerful operator for angular app. It combines all observables and publish data in case of all observables have at least one publish.
+    Here we can be sure that we have the latest data and can map it to something useful
+  </p>
+  {{combineLatest$ | async}}
+</app-block>
+<app-block title="catchError">
+  <p>
+    This operator is for catching errors and mostly used in case of http requests or for other case when throwError happens;
+  </p>
+  You can find an example inside the component
+</app-block>
+<app-block title="debounceTime">
+  <p>Don't use it often. It's really useful for autocomplete, resize events</p>
+</app-block>

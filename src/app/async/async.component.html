@@ -1,0 +1,28 @@
+<app-block title="Simple async example">
+  <p>Try to use async pipe instead of subscribing to streams in the components. Async pipe cares about subscribing and unsubscribing, which helps to make components much cleaner.</p>
+  <div><strong>example$: </strong></div>
+  <div>{{example$ | async}}</div>
+</app-block>
+
+<app-block title="Do not use async pipe for the same observable more than 1 time">
+  <p>Each async pipe subscribes to an observable. In some case you will get unexpected result. F.ex. In case of example2$ = httpClient.get('') it triggers two requests</p>
+  <div><strong>example2$: </strong></div>
+  <div>{{example2$ | async}}</div>
+  <div>{{example2$ | async}}</div>
+</app-block>
+
+<app-block title="Using *ngIf to prevent multiple subscriptions">
+  <p>In case of using *ngIf the content won't be rendered if the value is false, '', 0, undefined...</p>
+  <ng-container *ngIf="example3$ | async as example3">
+    <div>{{example3}}</div>
+    <div>{{example3}}</div>
+  </ng-container>
+</app-block>
+
+<app-block title="Using *ngrxLet to prevent multiple subscriptions">
+  <p>It solves the previous issue. *ngrxLet is a component, provided by @ngrx/component package</p>
+  <ng-container *ngrxLet="example4$ as example4">
+    <div>{{example4}}</div>
+    <div>{{example4}}</div>
+  </ng-container>
+</app-block>

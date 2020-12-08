@@ -1,0 +1,30 @@
+.main {
+  min-height: 100%;
+  display: flex;
+
+  .toolbar {
+    padding: 20px 0;
+    flex: 0 0 240px;
+    background: #f9f9f9;
+
+    a {
+      display: block;
+      text-decoration: none;
+      height: 40px;
+      font-size: 18px;
+      line-height: 40px;
+      padding: 0 16px;
+      color: #000;
+
+      &.active,
+      &:hover {
+        background: #eaeaea;
+      }
+    }
+  }
+
+  .content {
+    flex: 1 1 auto;
+    padding: 20px 32px;
+  }
+}

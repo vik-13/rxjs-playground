@@ -4,6 +4,7 @@ import { OperatorsComponent } from './operators';
 import { AsyncComponent } from './async';
 import { InputsComponent } from './inputs';
 import { RouterParamsComponent } from './router-params';
+import { ThePerfectComponentComponent } from './the-perfect-component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'router-params/:id',
     component: RouterParamsComponent
+  },
+  {
+    path: 'the-perfect-component',
+    component: ThePerfectComponentComponent
   },
   {
     path: '**',

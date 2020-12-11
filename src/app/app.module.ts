@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { InputsModule } from './inputs';
 import { RouterParamsModule } from './router-params';
+import { ThePerfectComponentModule } from './the-perfect-component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RouterParamsModule } from './router-params';
     AsyncModule,
     InputsModule,
     RouterParamsModule,
+    ThePerfectComponentModule,
 
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

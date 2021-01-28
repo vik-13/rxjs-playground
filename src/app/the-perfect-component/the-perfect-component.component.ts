@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
+import { combineLatest, Observable, ReplaySubject, Subject, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -27,7 +27,9 @@ export class ThePerfectComponentComponent implements OnChanges {
   data$: Observable<unknown>;
   date!: string;
 
-  constructor(private _http: HttpClient) {
+  testTimer$: Observable<string>;
+
+  constructor(private _http: HttpClient, private _changeDetectorRef: ChangeDetectorRef) {
     const b$: Subject<number> = new Subject<number>();
     const c$: Subject<number> = new Subject<number>();
 
@@ -46,9 +48,17 @@ export class ThePerfectComponentComponent implements OnChanges {
       this.date = value;
     });
 
-    setTimeout(() => {
-      this.token = 'test';
-    }, 2000);
+    this.testTimer$ = timer(3000).pipe(map(() => 'test1'));
+
+    timer(2000).subscribe(() => {
+      this.token = 'test2';
+      this._changeDetectorRef.markForCheck();
+    });
+
+    // setTimeout(() => {
+    //   this.token = 'test';
+    //   // this._changeDetectorRef.markForCheck();
+    // }, 2000);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

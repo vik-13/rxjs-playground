@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterParamsService } from './router-params.service';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable, timer } from 'rxjs';
 import { filter, first, map, switchMap, tap } from 'rxjs/operators';
 
 interface Animals {
@@ -17,7 +17,13 @@ interface Animals {
 export class RouterParamsComponent {
   animals$!: Observable<Animals>;
 
-  constructor(private _routerParams: RouterParamsService, private _activatedRoute: ActivatedRoute) {
+  constructor(private _routerParams: RouterParamsService,
+              private _activatedRoute: ActivatedRoute,
+              private _changeDetectorRef: ChangeDetectorRef) {
+    timer(4000).subscribe(() => {
+      _changeDetectorRef.markForCheck();
+    });
+
     console.log('init');
     this.animals$ = combineLatest([
       _activatedRoute.params.pipe(
@@ -38,5 +44,10 @@ export class RouterParamsComponent {
     ]).pipe(
       map(([selected, list]: [string, string[]]) => ({selected, list: list.join(', ')}))
     );
+  }
+
+  test(): string {
+    console.log('TEST');
+    return 'test';
   }
 }

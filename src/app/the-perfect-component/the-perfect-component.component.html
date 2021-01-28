@@ -3,6 +3,14 @@
     <input [ngModel]="title" name="title">
   </label>
 
+  <div>
+    {{'bla' | test}}
+  </div>
+
+  token: {{token}}
+
+  token2: {{testTimer$ | async}}
+
   <app-datepicker date="bla"></app-datepicker>
 
   <button type="submit">Submit</button>

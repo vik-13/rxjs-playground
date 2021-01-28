@@ -1,2 +1,12 @@
 <div class="title" *ngIf="title">{{title}}</div>
 <div class="content"><ng-content></ng-content></div>
+
+<div>
+  <h1>{{ title }}</h1>
+  <section>
+    <div class="count">{{ getItemCount() }}</div>
+    <div class="list" *ngIf="list.length">
+      <div class="item" *ngFor="let item of list">{{ item | sum }}</div>
+    </div>
+  </section>
+</div>
